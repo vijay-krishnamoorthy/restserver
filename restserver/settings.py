@@ -122,3 +122,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'backend.Profile'
+CORS_ORIGIN_WHITELIST=['http://localhost:4200']

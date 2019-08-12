@@ -16,12 +16,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from backend.viewsets import UserViewSet,ProfileViewSet
+from backend.viewsets import (
+    UserViewSet,
+    ProfileViewSet,
+    InquiryViewSet,
+    RechargeViewSet,
+    PrepaidViewSet,
+    DongleViewSet,
+)
+
+
 
 user = routers.DefaultRouter()
-user.register('users',UserViewSet)
+user.register('login',UserViewSet)
 # profile = routers.DefaultRouter()
 user.register('profile',ProfileViewSet)
+user.register('recharge',RechargeViewSet)
+user.register('dongleplans',DongleViewSet)
+user.register('plans',PrepaidViewSet)
+user.register('inquiry',InquiryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
