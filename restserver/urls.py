@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+# from rest_framework.authtoken import obtain_auth_token
 from backend.viewsets import (
     UserViewSet,
     ProfileViewSet,
@@ -26,7 +27,8 @@ from backend.viewsets import (
     FeedbackViewSet,
     PreformViewSet,
     PostformViewSet,
-    DongleformViewSet
+    DongleformViewSet,
+    CustomAuthToken,
 )
 
 
@@ -47,4 +49,5 @@ user.register('form3',DongleformViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(user.urls)),
+    path('auth/',CustomAuthToken.as_view(),name='auth')
 ]

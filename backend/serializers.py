@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+
 from .models import (
     User,
     Profile,
@@ -13,11 +14,36 @@ from .models import (
     Dongleform,
 )
 
+#  class CustomRegisterSerializer(RegisterSerializer):
+     
+#         email = serializers.EmailField(required=True)
+#         password = serializers.CharField(write_only=True)
+#         username = serializers.CharField(required=True)
+#         mobile = serializers.CharField(required=True)
+
+#         def get_cleaned_data(self):
+#             super(CustomRegisterSerializer, self).get_cleaned_data()
+
+#             return {
+#                 'password': self.validated_data.get('password', ''),
+#                 'email': self.validated_data.get('email', ''),
+#                 'username': self.validated_data.get('username', ''),
+#                 'mobile': self.validated_data.get('mobile', ''),
+#             }
+
 class UserSerializer(ModelSerializer):
+
     class Meta:
-        model=Profile
-        fields=('id','username','email','password','phone')
-        lookup_field='phone'
+        model = User
+        fields = ('id','mobile','username','email','password')
+        read_only_fields = ('mobile',)
+        lookup_field=['mobile']
+        
+# class UserSerializer(ModelSerializer):
+#     class Meta:
+#         model=Profile
+#         fields=('id','username','email','password','phone')
+#         lookup_field='phone'
 
 class ProfileSerializer(ModelSerializer):
     class Meta:

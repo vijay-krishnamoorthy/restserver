@@ -1,15 +1,59 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,BaseUserManager,UserManager
+import datetime
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+    mobile=models.CharField(max_length=11,unique=True)
+    email=models.EmailField(unique=True)
+    date_joined=models.DateField(default=datetime.date.today)
+    USERNAME_FIELD='mobile'
+    REQUIRED_FIELDS=('username','password','email')
     def __str__(self):
         return self.username
+    object=UserManager()
+
+
+class UserManager(BaseUserManager):
+
+    use_in_migrations = True
+
+    def create_user(self,mobile,email, username, password=None):
+        user = self.model(
+            email=self.normalize_email(email),
+            mobile=mobile,
+            username=username,
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_staffuser(self, email, username,mobile, password):
+        user = self.create_user(
+            email,
+            password=password,
+            username=username,
+            mobile=mobile
+        )
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, username, mobile, password):
+        user = self.create_user(
+            email,
+            password=password,
+            mobile=mobile,
+            username=username,
+            name= "True",
+        )
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
 
 class Profile(User):
     profile=models.OneToOneField(User,on_delete=models.CASCADE,related_name='user',parent_link=True)
-    phone=models.CharField(max_length=10,unique=True)
 
     def __str__(self):
         return self.username
@@ -27,12 +71,8 @@ class Prepaidplans(models.Model):
 
 class Dashboard(Profile):
     dashboardprofile=models.OneToOneField(Profile,on_delete=models.CASCADE,related_name='dashboard',parent_link=True)
-<<<<<<< HEAD
-    active_plan=models.ForeignKey(Prepaidplans, on_delete=models.CASCADE,related_name='prepaidplans',parent_link=True,null=True)
-=======
     # active_plan=models.OneToOneField(Prepaidplans, on_delete=models.CASCADE,related_name='prepaidplans',parent_link=True)
-    active_plan=models.CharField(max_length=100,default="No active plan")
->>>>>>> be30c586a7d5b7283af9d6f5d630f60b1bb04d73
+    active_plan=models.CharField(max_length=150,default="No active plan")
     plan_type=models.CharField(max_length=50,blank=True,null=True)
     voice_usage=models.CharField(max_length=100,blank=True,null=True)
     data_usage=models.CharField(max_length=100,blank=True,null=True)

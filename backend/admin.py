@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+# from rest_framework.authtoken.admin import TokenAdmin
+# from rest_framework.authtoken.models import Token
+
 from .models import (
     User,
     Dashboard,
@@ -24,3 +27,5 @@ admin.site.register(Feedback)
 admin.site.register(Preform)
 admin.site.register(Postform)
 admin.site.register(Dongleform)
+# admin.site.register(TokenAdmin)
+# TokenAdmin.raw_id_fields = ['user']
