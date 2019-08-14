@@ -7,6 +7,10 @@ from .models import (
     Inquiry,
     Dongleplans,
     Prepaidplans,
+    Feedback,
+    Preform,
+    Postform,
+    Dongleform,
 )
 from .serializers import (
     UserSerializer,
@@ -15,8 +19,11 @@ from .serializers import (
     InquirySerializer,
     PrepaidSerializer,
     DongleSerializer,
+    FeedbackSerializer,
+    PreformSerializer,
+    PostformSerializer,
+    DongleformSerializer
 )
-
 
 
 class UserViewSet(ModelViewSet):
@@ -46,3 +53,18 @@ class PrepaidViewSet(ModelViewSet):
 class RechargeViewSet(ModelViewSet):
     queryset=Recharge.objects.all()
     serializer_class=RechargeSerializer
+
+class FeedbackViewSet(ModelViewSet): #viewset methods:list,create,retrieve,update,partial_update,destroy
+    queryset=Feedback.objects.all()
+    serializer_class=FeedbackSerializer
+class PreformViewSet(ModelViewSet): #viewset methods:list,create,retrieve,update,partial_update,destroy
+    queryset=Preform.objects.all()
+    serializer_class=PreformSerializer
+
+class PostformViewSet(ModelViewSet): #viewset methods:list,create,retrieve,update,partial_update,destroy
+    queryset=Postform.objects.all()
+    serializer_class=PostformSerializer
+
+class DongleformViewSet(ModelViewSet): #viewset methods:list,create,retrieve,update,partial_update,destroy
+    queryset=Dongleform.objects.all()
+    serializer_class=DongleformSerializer

@@ -23,6 +23,10 @@ from backend.viewsets import (
     RechargeViewSet,
     PrepaidViewSet,
     DongleViewSet,
+    FeedbackViewSet,
+    PreformViewSet,
+    PostformViewSet,
+    DongleformViewSet
 )
 
 
@@ -35,6 +39,10 @@ user.register('recharge',RechargeViewSet)
 user.register('dongleplans',DongleViewSet)
 user.register('plans',PrepaidViewSet)
 user.register('inquiry',InquiryViewSet)
+user.register('feedback',FeedbackViewSet)
+user.register('form1',PreformViewSet)
+user.register('form2',PostformViewSet)
+user.register('form3',DongleformViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
