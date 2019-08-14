@@ -27,7 +27,12 @@ class Prepaidplans(models.Model):
 
 class Dashboard(Profile):
     dashboardprofile=models.OneToOneField(Profile,on_delete=models.CASCADE,related_name='dashboard',parent_link=True)
+<<<<<<< HEAD
     active_plan=models.ForeignKey(Prepaidplans, on_delete=models.CASCADE,related_name='prepaidplans',parent_link=True,null=True)
+=======
+    # active_plan=models.OneToOneField(Prepaidplans, on_delete=models.CASCADE,related_name='prepaidplans',parent_link=True)
+    active_plan=models.CharField(max_length=100,default="No active plan")
+>>>>>>> be30c586a7d5b7283af9d6f5d630f60b1bb04d73
     plan_type=models.CharField(max_length=50,blank=True,null=True)
     voice_usage=models.CharField(max_length=100,blank=True,null=True)
     data_usage=models.CharField(max_length=100,blank=True,null=True)
